@@ -17,9 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           autocapitalize: "off",
           autocorrect: "off"
         }
-      });
-      
-      
+      });   
 
     let carrito = [];
     const divisa = '$';
@@ -174,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }, 0).toFixed(2);
     }
  
-    function animacionVaciar() {
+    function animacionConfirmar() {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: "btn btn-success",
@@ -184,10 +182,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     
         return swalWithBootstrapButtons.fire({
-            title: "¿Estás seguro de vaciar el carrito?",
+            title: "¿Estás seguro?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Sí, vaciar",
+            confirmButtonText: "Sí, segurisimo",
             cancelButtonText: "Cancelar",
             
            
@@ -206,23 +204,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     return result; 
         };
     
-    
     function vaciarCarrito() {
         
-        
-        animacionVaciar
-    animacionVaciar().then((result) => {
+    animacionConfirmar().then((result) => {
             
-           
     if (result.isConfirmed) {
                
                 carrito = [];
-                
-    
-                renderizarCarrito();
-                
-                
-               
+                renderizarCarrito();         
     localStorage.clear();
             }
         });
@@ -237,63 +226,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             carrito = JSON.parse(miLocalStorage.getItem('carrito'));
         }
     }
-    
 
-    
-    function animacionCompra() {
-        
-        const swalWithBootstrapButtonss = Swal.mixin({
-            customClass: {
-              confirmButton: "btn btn-success",
-              cancelButton: "btn btn-danger"
-            },
-            buttonsStyling: false
-          });
-          swalWithBootstrapButtonss.fire({
-            title: "Estas seguro de realizar esta compra???",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Si, estoy seguro",
-            cancelButtonText: "No, capo no tengo guita",
-            reverseButtons: true
-          }).then((result) => {
-            if (result.isConfirmed) {
-              swalWithBootstrapButtonss.fire({
-                title: "Perfecto",
-                text: "Su compra se realizo con Exito",
-                icon: "success"
-              });
-            } else if (
-              
-              result.dismiss === Swal.DismissReason.cancel
-            ) {
-              swalWithBootstrapButtonss.fire({
-                title: "F",
-                text: "Espero que puedas juntar la plata para poder comprarte las camisetas :)",
-                icon: "error"
-              });
-            }
-          });
-    }
-    function comprarCarrito() {
-        
-        animacionCompra().then((result) => {
-            
-           
+    function comprarCarrito() {       
+        animacionConfirmar().then((result) => {       
             if (result.isConfirmed) {
                        
                         carrito = [];
-                        
-            
                         renderizarCarrito();
-                        
-                        
-                       
+                                             
             localStorage.clear();
                     }
                 });
-            }
-    
+
+    }
+
     DOMbotonVaciar.addEventListener('click', vaciarCarrito);
     DOMbotonComprar.addEventListener('click', comprarCarrito);
 
