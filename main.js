@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     let carrito = [];
-    const divisa = '€';
+    const divisa = '$';
     const DOMitems = document.querySelector('#items');
     const DOMcarrito = document.querySelector('#carrito');
     const DOMtotal = document.querySelector('#total');
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Precio
             const miNodoPrecio = document.createElement('p');
             miNodoPrecio.classList.add('card-text');
-            miNodoPrecio.textContent = `${info.precio}${divisa}`;
+            miNodoPrecio.textContent = `${divisa}${info.precio}`;
             // Boton
             const miNodoBoton = document.createElement('button');
             miNodoBoton.classList.add('btn', 'btn-primary');
