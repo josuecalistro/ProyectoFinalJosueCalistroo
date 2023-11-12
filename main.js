@@ -238,24 +238,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
     
-    function comprarCarrito() {
-        
-    animacionCompra();
-    
-    vaciarCarrito();
-    
-    }
+
     
     function animacionCompra() {
         
-        const swalWithBootstrapButtons = Swal.mixin({
+        const swalWithBootstrapButtonss = Swal.mixin({
             customClass: {
               confirmButton: "btn btn-success",
               cancelButton: "btn btn-danger"
             },
             buttonsStyling: false
           });
-          swalWithBootstrapButtons.fire({
+          swalWithBootstrapButtonss.fire({
             title: "Estas seguro de realizar esta compra???",
             icon: "warning",
             showCancelButton: true,
@@ -264,7 +258,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             reverseButtons: true
           }).then((result) => {
             if (result.isConfirmed) {
-              swalWithBootstrapButtons.fire({
+              swalWithBootstrapButtonss.fire({
                 title: "Perfecto",
                 text: "Su compra se realizo con Exito",
                 icon: "success"
@@ -273,7 +267,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               
               result.dismiss === Swal.DismissReason.cancel
             ) {
-              swalWithBootstrapButtons.fire({
+              swalWithBootstrapButtonss.fire({
                 title: "F",
                 text: "Espero que puedas juntar la plata para poder comprarte las camisetas :)",
                 icon: "error"
@@ -281,6 +275,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
           });
     }
+    function comprarCarrito() {
+        
+        animacionCompra().then((result) => {
+            
+           
+            if (result.isConfirmed) {
+                       
+                        carrito = [];
+                        
+            
+                        renderizarCarrito();
+                        
+                        
+                       
+            localStorage.clear();
+                    }
+                });
+            }
     
     DOMbotonVaciar.addEventListener('click', vaciarCarrito);
     DOMbotonComprar.addEventListener('click', comprarCarrito);
